@@ -2,7 +2,7 @@
 
 Revision ID: 0001
 Revises: 
-Create Date: 2026-11-25 16:23:25.005524
+Create Date: 2026-11-25 17:37:21.552032
 """
 from collections.abc import Sequence
 
@@ -21,8 +21,6 @@ def upgrade() -> None:
     op.create_table('accounts',
     sa.Column('id', sa.Uuid(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('type', sa.Enum('asset', 'liability', 'equity', 'revenue', 'expense', name='accounttype', native_enum=False, length=20), nullable=False),
-    sa.Column('currency', sa.String(length=3), nullable=False),
     sa.Column('status', sa.Enum('active', 'closed', name='accountstatus', native_enum=False, length=20), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id')

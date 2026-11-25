@@ -1,9 +1,10 @@
 # Payments Ledger API
 
-A double-entry payments ledger built with FastAPI, async SQLAlchemy 2.0 and PostgreSQL.
+A payments ledger built with FastAPI, async SQLAlchemy 2.0 and PostgreSQL.
 Uses synthetic data only.
 
-> Work in progress. Status: accounts CRUD. Next: transactions, idempotency, reversals.
+> Work in progress. Status: savings accounts (create, get, close, paged list).
+> Next: transactions, entries, idempotency, reversals.
 
 ## Run
 

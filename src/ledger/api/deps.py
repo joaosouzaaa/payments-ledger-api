@@ -4,8 +4,8 @@ from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ledger.db.session import get_session
-from ledger.repositories.accounts import AccountRepository
-from ledger.services.accounts import AccountService
+from ledger.repositories.account_repository import AccountRepository
+from ledger.services.account_service import AccountService
 
 SessionDep = Annotated[AsyncSession, Depends(get_session)]
 

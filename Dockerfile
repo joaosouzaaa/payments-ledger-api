@@ -1,19 +1,10 @@
-FROM python:3.13-slim
+FROM python:slim
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
-COPY --from=ghcr.io/astral-sh/uv:0.5 /uv /usr/local/bin/uv
-
-ENV UV_PROJECT_ENVIRONMENT=/opt/venv \
-    UV_COMPILE_BYTECODE=1 \
-    PATH="/opt/venv/bin:$PATH"
-
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv PATH="/opt/venv/bin:$PATH" PYTHONDONTWRITEBYTECODE=1
 WORKDIR /app
 
-COPY pyproject.toml README.md ./
-COPY src ./src
+COPY . .
 RUN uv sync --no-dev
 
-COPY alembic.ini ./
-COPY alembic ./alembic
-
-EXPOSE 8000
 CMD ["uvicorn", "ledger.main:app", "--host", "0.0.0.0", "--port", "8000"]

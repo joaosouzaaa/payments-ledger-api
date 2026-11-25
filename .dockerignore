@@ -1,0 +1,7 @@
+*
+!src
+!alembic
+!alembic.ini
+!pyproject.toml
+!README.md
+**/__pycache__

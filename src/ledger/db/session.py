@@ -1,6 +1,11 @@
 from collections.abc import AsyncIterator
 
-from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
 
 from ledger.config import get_settings
 
@@ -25,8 +30,5 @@ async def dispose_engine() -> None:
 
 
 async def get_session() -> AsyncIterator[AsyncSession]:
-    """One session per request. Services commit explicitly, so the commit happens before the
-    response is sent (FastAPI may run post-yield code after the response). Uncommitted work is
-    rolled back when the session closes."""
     async with get_sessionmaker()() as session:
         yield session

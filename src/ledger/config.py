@@ -7,7 +7,6 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     database_url: str = "postgresql+asyncpg://ledger:ledger@localhost:5432/ledger"
-    test_database_url: str = "postgresql+asyncpg://ledger:ledger@localhost:5432/ledger_test"
 
 
 @lru_cache

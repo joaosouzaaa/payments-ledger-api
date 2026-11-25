@@ -1,11 +1,10 @@
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
-from ledger.domain.errors import AccountClosedError, AccountNotFoundError, LedgerError
+from ledger.domain.errors import AccountNotFoundError, LedgerError
 
 _STATUS_BY_ERROR: dict[type[LedgerError], int] = {
     AccountNotFoundError: status.HTTP_404_NOT_FOUND,
-    AccountClosedError: status.HTTP_409_CONFLICT,
 }
 
 

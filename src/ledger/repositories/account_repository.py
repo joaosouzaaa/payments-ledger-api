@@ -1,9 +1,9 @@
-from collections.abc import Sequence
 from uuid import UUID
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from ledger.common.pagination import PageList, PageParameters, paginate
 from ledger.db.models import Account
 
 
@@ -23,8 +23,6 @@ class AccountRepository:
     async def get(self, account_id: UUID) -> Account | None:
         return await self._session.get(Account, account_id)
 
-    async def list(self, *, limit: int, offset: int) -> Sequence[Account]:
-        result = await self._session.scalars(
-            select(Account).order_by(Account.created_at, Account.id).limit(limit).offset(offset)
-        )
-        return result.all()
+    async def list(self, page_parameters: PageParameters) -> PageList[Account]:
+        query = select(Account).order_by(Account.created_at, Account.id)
+        return await paginate(self._session, query, page_parameters)
