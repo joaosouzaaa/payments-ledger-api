@@ -19,3 +19,7 @@ API docs: http://localhost:8000/docs
 ```powershell
 docker compose run --rm api sh -c "uv sync --group dev && pytest"
 ```
+
+## License
+
+[MIT](LICENSE)
